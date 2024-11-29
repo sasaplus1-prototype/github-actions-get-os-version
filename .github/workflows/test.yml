@@ -72,6 +72,5 @@ jobs:
     steps:
       - run: systeminfo /?
       - run: systeminfo
-      - run: systeminfo | findstr /B /C:"OS Name" /C:"OS Version"
       # /^OS/ is exclude "BIOS"
       - run: systeminfo | awk '/^OS Version:/ { print $3 }'
