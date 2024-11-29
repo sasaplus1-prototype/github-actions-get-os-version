@@ -6,8 +6,8 @@ on:
 jobs:
   test-ubuntu:
     strategy:
+      fail-fast: false
       matrix:
-        fail-fast: false
         # https://github.com/actions/runner-images?tab=readme-ov-file#available-images
         os:
           - ubuntu-24.04
@@ -19,8 +19,8 @@ jobs:
       - run: lsb_release -a
   test-macos:
     strategy:
+      fail-fast: false
       matrix:
-        fail-fast: false
         # https://github.com/actions/runner-images?tab=readme-ov-file#available-images
         os:
           - macos-15-large
@@ -37,8 +37,8 @@ jobs:
       - run: sw_vers | awk '/ProductVersion/ { print $2 }'
   test-windows:
     strategy:
+      fail-fast: false
       matrix:
-        fail-fast: false
         # https://github.com/actions/runner-images?tab=readme-ov-file#available-images
         os:
           - windows-2022
