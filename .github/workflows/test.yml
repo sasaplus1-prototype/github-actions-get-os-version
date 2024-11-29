@@ -57,3 +57,21 @@ jobs:
       - run: systeminfo | findstr /B /C:"OS Name" /C:"OS Version"
       # /^OS/ is exclude "BIOS"
       - run: systeminfo | awk '/^OS Version:/ { print $3 }'
+  test-windows-with-bash:
+    strategy:
+      fail-fast: false
+      matrix:
+        # https://github.com/actions/runner-images?tab=readme-ov-file#available-images
+        os:
+          - windows-2022
+          - windows-2019
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - run: systeminfo /?
+      - run: systeminfo
+      - run: systeminfo | findstr /B /C:"OS Name" /C:"OS Version"
+      # /^OS/ is exclude "BIOS"
+      - run: systeminfo | awk '/^OS Version:/ { print $3 }'
