@@ -1,0 +1,46 @@
+name: test
+
+on:
+  - push
+
+jobs:
+  test-ubuntu:
+    strategy:
+      matrix:
+        # https://github.com/actions/runner-images?tab=readme-ov-file#available-images
+        os:
+          - ubuntu-24.04
+          - ubuntu-22.04
+          - ubuntu-20.04
+    runs-on: ${{ matrix.os }}
+    steps:
+      - run: cat /etc/os-release
+      - run: lsb_release -a
+  test-macos:
+    strategy:
+      matrix:
+        # https://github.com/actions/runner-images?tab=readme-ov-file#available-images
+        os:
+          - macos-15-large
+          - macos-15 # = macos-15-xlarge
+          - macos-14-large
+          - macos-14 # = macos-14-xlarge
+          - macos-13 # = macos-13-large
+          - macos-13-xlarge
+          - macos-12
+          - macos-12-large
+    runs-on: ${{ matrix.os }}
+    steps:
+      - run: sw_vers
+      - run: sw_vers | awk '/ProductVersion/ { print $2 }'
+  test-windows:
+    strategy:
+      matrix:
+        # https://github.com/actions/runner-images?tab=readme-ov-file#available-images
+        os:
+          - windows-2022
+          - windows-2019
+    runs-on: ${{ matrix.os }}
+    steps:
+      - run: systeminfo
+      - run: systeminfo | findstr /B /C:"OS Name" /C:"OS Version"
