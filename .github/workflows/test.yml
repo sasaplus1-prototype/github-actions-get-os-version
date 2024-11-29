@@ -16,6 +16,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - run: cat /etc/os-release
+      - run: lsb_release --help
       - run: lsb_release -a
   test-macos:
     strategy:
@@ -34,7 +35,9 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - run: sw_vers
+      - run: sw_vers --help
       - run: sw_vers | awk '/ProductVersion/ { print $2 }'
+      - run: sw_vers --productVersion
   test-windows:
     strategy:
       fail-fast: false
@@ -45,5 +48,6 @@ jobs:
           - windows-2019
     runs-on: ${{ matrix.os }}
     steps:
+      - run: systeminfo /?
       - run: systeminfo
       - run: systeminfo | findstr /B /C:"OS Name" /C:"OS Version"
