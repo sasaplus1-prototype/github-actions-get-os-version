@@ -18,24 +18,26 @@ jobs:
       - run: cat /etc/os-release
       - run: lsb_release --help
       - run: lsb_release -a
+      - run: lsb_release -r
   test-macos:
     strategy:
       fail-fast: false
       matrix:
         # https://github.com/actions/runner-images?tab=readme-ov-file#available-images
         os:
-          - macos-15-large
+          # macos-15-large
           - macos-15 # = macos-15-xlarge
-          - macos-14-large
+          # macos-14-large
           - macos-14 # = macos-14-xlarge
           - macos-13 # = macos-13-large
-          - macos-13-xlarge
+          # macos-13-xlarge
           - macos-12
-          - macos-12-large
+          # macos-12-large
     runs-on: ${{ matrix.os }}
     steps:
       - run: sw_vers
       - run: sw_vers --help
+        continue-on-error: true # fail macos-12
       - run: sw_vers | awk '/ProductVersion/ { print $2 }'
       - run: sw_vers --productVersion
   test-windows:
@@ -51,3 +53,4 @@ jobs:
       - run: systeminfo /?
       - run: systeminfo
       - run: systeminfo | findstr /B /C:"OS Name" /C:"OS Version"
+      - run: systeminfo | awk '/OS Version:/ { print $2 }'
