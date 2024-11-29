@@ -7,6 +7,7 @@ jobs:
   test-ubuntu:
     strategy:
       matrix:
+        fail-fast: false
         # https://github.com/actions/runner-images?tab=readme-ov-file#available-images
         os:
           - ubuntu-24.04
@@ -19,6 +20,7 @@ jobs:
   test-macos:
     strategy:
       matrix:
+        fail-fast: false
         # https://github.com/actions/runner-images?tab=readme-ov-file#available-images
         os:
           - macos-15-large
@@ -36,6 +38,7 @@ jobs:
   test-windows:
     strategy:
       matrix:
+        fail-fast: false
         # https://github.com/actions/runner-images?tab=readme-ov-file#available-images
         os:
           - windows-2022
