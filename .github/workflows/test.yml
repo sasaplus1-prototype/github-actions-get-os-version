@@ -40,7 +40,7 @@ jobs:
       - run: sw_vers --help
         continue-on-error: true # fail macos-12
       - run: sw_vers | awk '/ProductVersion/ { print $2 }'
-      - run: sw_vers --productVersion || sw_vers --productVersion
+      - run: sw_vers --productVersion || sw_vers -productVersion
   test-windows:
     strategy:
       fail-fast: false
